@@ -1102,9 +1102,9 @@ body {
     }
 }
 
-@media (max-width: 480px) {
+@media (max-width: 640px) {
     .hero-title {
-        font-size: 2.5rem;
+        font-size: 2.2rem;
     }
 
     .hero-subtitle {
@@ -1117,14 +1117,17 @@ body {
     }
 
     .phone-frame {
-        width: 200px;
-        height: 420px;
-        border-radius: 35px;
-        padding: 8px;
+        width: 280px;
+        /* Widened from 200px to give more space */
+        height: 580px;
+        /* Proportional height increase */
+        border-radius: 40px;
+        padding: 10px;
+        margin: 0 auto;
     }
 
     .phone-screen {
-        border-radius: 28px;
+        border-radius: 32px;
     }
 
     .plan-card {
