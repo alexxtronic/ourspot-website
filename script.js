@@ -15,34 +15,47 @@ document.addEventListener('DOMContentLoaded', () => {
 /**
  * Scroll Reveal Animation
  * Elements fade in and slide up as they enter viewport
+ * Statement cards appear one at a time with stagger
  */
 function initScrollReveal() {
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
-
-    const observer = new IntersectionObserver((entries) => {
+    // General reveal for other elements
+    const generalObserver = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('revealed');
-                observer.unobserve(entry.target);
+                generalObserver.unobserve(entry.target);
             }
         });
-    }, observerOptions);
+    }, { threshold: 0.1 });
 
-    // Add reveal class to elements
-    const revealElements = document.querySelectorAll(
-        '.statement-card, .stat, .big-text, .cta-content'
-    );
+    // Statement cards - staggered reveal one at a time
+    const statementObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('revealed');
+                statementObserver.unobserve(entry.target);
+            }
+        });
+    }, { threshold: 0.3, rootMargin: '-50px' });
 
-    revealElements.forEach((el, index) => {
+    // Setup statement cards with staggered delays
+    const statementCards = document.querySelectorAll('.statement-card');
+    statementCards.forEach((card, index) => {
+        card.style.opacity = '0';
+        card.style.transform = 'translateY(60px) scale(0.95)';
+        card.style.transition = `opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.15}s, 
+                                 transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.15}s`;
+        statementObserver.observe(card);
+    });
+
+    // Setup other reveal elements
+    const otherElements = document.querySelectorAll('.stat, .big-text, .cta-content');
+    otherElements.forEach((el, index) => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(40px)';
         el.style.transition = `opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.1}s, 
                                transform 0.8s cubic-bezier(0.16, 1, 0.3, 1) ${index * 0.1}s`;
-        observer.observe(el);
+        generalObserver.observe(el);
     });
 
     // Add the revealed state styles
@@ -50,7 +63,7 @@ function initScrollReveal() {
     style.textContent = `
         .revealed {
             opacity: 1 !important;
-            transform: translateY(0) !important;
+            transform: translateY(0) scale(1) !important;
         }
     `;
     document.head.appendChild(style);
