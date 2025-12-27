@@ -959,6 +959,30 @@ body {
 }
 
 /* ═══════════════════════════════════════════════════════════════════════════
+   Testimonials Section
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.testimonials {
+    padding: var(--space-2xl) var(--space-lg);
+    position: relative;
+    z-index: 1;
+}
+
+.testimonials-content {
+    max-width: 600px;
+    margin: 0 auto;
+    text-align: center;
+}
+
+.testimonials-image {
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    border-radius: var(--radius-lg);
+    filter: drop-shadow(0 20px 50px rgba(0, 0, 0, 0.5));
+}
+
+/* ═══════════════════════════════════════════════════════════════════════════
    Final CTA Section
    ═══════════════════════════════════════════════════════════════════════════ */
 
