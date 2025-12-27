@@ -1142,6 +1142,66 @@ body {
     .plan-meta {
         font-size: 0.65rem;
     }
+
+    /* Mobile adjustments for map elements */
+    .pin-attendees img {
+        width: 24px;
+        height: 24px;
+        border-width: 1.5px;
+        margin-left: -8px;
+    }
+
+    .pin-label {
+        font-size: 0.5rem;
+        padding: 2px 6px;
+        border-radius: 8px;
+    }
+
+    .event-card-preview {
+        bottom: 60px;
+        left: 10px;
+        right: 10px;
+        padding: 6px 8px;
+        border-radius: 12px;
+    }
+
+    .event-attendees img {
+        width: 24px;
+        height: 24px;
+        margin-left: -8px;
+    }
+
+    .event-name {
+        font-size: 0.65rem;
+    }
+
+    .event-join {
+        padding: 4px 10px;
+        font-size: 0.6rem;
+    }
+
+    .nav-bar {
+        bottom: 12px;
+        left: 12px;
+        right: 12px;
+        padding: 8px 4px;
+    }
+
+    .nav-item svg {
+        width: 18px;
+        height: 18px;
+    }
+
+    .nav-item.nav-plus {
+        width: 36px;
+        height: 36px;
+        margin-top: -18px;
+    }
+
+    .nav-item.nav-plus svg {
+        width: 20px;
+        height: 20px;
+    }
 }
 
 /* Smooth scrolling for the whole page */

@@ -5,12 +5,49 @@
 
 // Wait for DOM to be ready
 document.addEventListener('DOMContentLoaded', () => {
+    // Check for Deep Link Redirect
+    handleDeepLinkRedirect();
+
     initScrollReveal();
     initParallaxOrbs();
     initSmoothScroll();
     initNavShrink();
     initButtonRipple();
 });
+
+/**
+ * Handle Deep Link Redirect
+ * Checks for ?planId=XYZ in URL and attempts to open app
+ */
+function handleDeepLinkRedirect() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const planId = urlParams.get('planId');
+
+    if (planId) {
+        // Change UI to show we are opening the event
+        const heroTitle = document.querySelector('.hero-title');
+        const heroSubtitle = document.querySelector('.hero-subtitle');
+
+        if (heroTitle) {
+            heroTitle.innerHTML = 'Opening <span class="gradient-text">Event...</span>';
+        }
+        if (heroSubtitle) {
+            heroSubtitle.innerHTML = 'Taking you to the plan. If nothing happens, get the app below.';
+        }
+
+        // Attempt to open custom scheme
+        window.location.href = `ourspot://plan/${planId}`;
+
+        // Fallback: If app doesn't open in 2s, we assume not installed or web context
+        // We stay on this page but scroll to download section
+        setTimeout(() => {
+            const downloadSection = document.getElementById('download');
+            if (downloadSection) {
+                downloadSection.scrollIntoView({ behavior: 'smooth' });
+            }
+        }, 1500);
+    }
+}
 
 /**
  * Scroll Reveal Animation
